@@ -60,7 +60,6 @@
     <!-- Меню -->
     <!-- Навигация -->
     <?php
-    $i;
     $count = $_COOKIE['pass'] + 1;
     $data = $_COOKIE['time'];
     echo "Количество посещений: $count <br>";
