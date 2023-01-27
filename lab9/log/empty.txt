@@ -1,0 +1,2 @@
+["2023-01-27 08:12:01","\/lab8\/index.php?id=log","http:\/\/localhost\/lab8\/index.php?id=info"]
+["2023-01-27 08:12:19","\/lab8\/index.php?id=log","http:\/\/localhost\/lab8\/index.php?id=info"]
