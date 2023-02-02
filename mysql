@@ -1,0 +1,80 @@
+task 1
+SELECT azamat_user.lastname as name, azamat_user.firstname as firstname, azamat_user.patronomic as patronomic, azamat_gender.name as gender, azamat_otdel.name as otdel
+FROM azamat_user
+JOIN azamat_gender on azamat_user.gender_id = azamat_gender.gender_id
+JOIN azamat_teacher on azamat_user.user_id = azamat_teacher.user_id
+JOIN azamat_otdel on azamat_teacher.otdel_id = azamat_otdel.otdel_id
+WHERE azamat_otdel.name = 'Информационные системы'
+task 2
+SELECT azamat_user.lastname as name, azamat_user.firstname as firstname, azamat_user.patronomic as patronomic, azamat_gruppa.name as gruppa, azamat_special.name as special, azamat_otdel.name as otdel
+FROM azamat_user
+JOIN azamat_student on azamat_user.user_id = azamat_student.user_id
+JOIN azamat_gruppa on azamat_student.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_special on azamat_gruppa.special_id = azamat_special.special_id 
+JOIN azamat_otdel on azamat_special.otdel_id = azamat_otdel.otdel_id
+WHERE azamat_otdel.name = 'Информационные системы'
+task 3
+SELECT azamat_course.name as predmet, azamat_special.name as special, azamat_course.hours, azamat_otdel.name as otdel 
+FROM azamat_course
+JOIN azamat_special on azamat_course.special_id = azamat_special.special_id
+JOIN azamat_otdel on azamat_special.otdel_id = azamat_otdel.otdel_id
+WHERE azamat_otdel.name = 'Технические специальности'
+task 4
+SELECT azamat_gruppa.name as gruppa, azamat_gruppa.date_begin as nachalo, azamat_gruppa.date_end as konec, azamat_special.name as special
+FROM azamat_gruppa
+JOIN azamat_special on azamat_gruppa.special_id = azamat_special.special_id
+WHERE azamat_special.name = 'Информационные системы'
+task 5
+SELECT azamat_user.lastname as name, azamat_user.firstname as firstname, azamat_user.patronomic as patronomic, azamat_gruppa.name as gruppa, azamat_course.name as disciplina
+FROM azamat_user
+JOIN azamat_student on azamat_user.user_id = azamat_student.user_id
+JOIN azamat_gruppa on azamat_student.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_special on azamat_gruppa.special_id = azamat_special.special_id
+JOIN azamat_course on azamat_special.special_id = azamat_course.special_id
+WHERE  azamat_course.name = 'Мультимедиа технологии’
+task 6	
+SELECT  azamat_user.lastname as name, azamat_user.firstname as firstname, azamat_user.patronomic as patronomic, azamat_course.name as predmet, azamat_course.hours as hours, azamat_gruppa.name as gruppa
+FROM azamat_user 
+JOIN azamat_teacher on azamat_user.user_id = azamat_teacher.user_id
+JOIN azamat_graduate on azamat_teacher.user_id = azamat_graduate.user_id
+JOIN azamat_course on azamat_graduate.course_id = azamat_course.course_id
+JOIN azamat_gruppa on azamat_graduate.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_graduate_time on azamat_graduate.graduate_id = azamat_graduate_time.graduate_id
+JOIN azamat_lesson_num on azamat_graduate_time.lesson_num_id = azamat_lesson_num.lesson_num_id
+WHERE azamat_lesson_num.time_lesson BETWEEN '08:30:00' AND '15:00:00’
+task 7
+SELECT COUNT(*) as cnt, azamat_otdel.name as otdel
+FROM azamat_user
+JOIN azamat_student on azamat_user.user_id = azamat_student.user_id
+JOIN azamat_gruppa on azamat_student.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_special on azamat_gruppa.special_id = azamat_special.special_id
+JOIN azamat_otdel on azamat_special.otdel_id = azamat_otdel.otdel_id 
+GROUP BY azamat_otdel.otdel_id
+task 8
+SELECT COUNT(*) as cnt, azamat_gruppa.name as gruppa
+FROM azamat_user
+JOIN azamat_student on azamat_user.user_id = azamat_student.user_id
+JOIN azamat_gruppa on azamat_student.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_graduate on ersos_gruppa.gruppa_id = azamat_graduate.gruppa_id
+JOIN azamat_course on azamat_graduate.course_id = azamat_course.course_id
+GROUP BY azamat_gruppa.gruppa_id
+task 9 
+SELECT azamat_user.lastname as lastname, azamat_user.firstname as firstname
+FROM azamat_user 
+JOIN azamat_teacher on azamat_user.user_id = azamat_teacher.user_id
+JOIN azamat_graduate on azamat_teacher.user_id = azamat_graduate.user_id
+JOIN azamat_course on azamat_graduate.course_id = azamat_course.course_id
+WHERE NOT azamat_course.name
+task 10 
+SELECT azamat_course.name as predmets
+FROM azamat_user 
+JOIN azamat_student on azamat_user.user_id = azamat_student.user_id
+JOIN azamat_gruppa on azamat_student.gruppa_id = azamat_gruppa.gruppa_id
+JOIN azamat_graduate on azamat_gruppa.gruppa_id = azamat_graduate.gruppa_id
+JOIN azamat_course on azamat_graduate.course_id = azamat_course.course_id
+WHERE NOT azamat_user.user_id
+task 11
+SELECT azamat_special.name as special
+FROM azamat_special
+JOIN azamat_course on azamat_special.special_id = azamat_course.special_id
+WHERE NOT azamat_course.name
